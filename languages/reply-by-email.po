@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Reply By Email 0.2.2\n"
+"POT-Creation-Date: 2015-06-06 08:39+0100\n"
+"PO-Revision-Date: 2015-06-06 11:38+0100\n"
+"Last-Translator: Paul <dt01pqt_pt@yahoo.com>\n"
+"Language-Team: replyPUSH\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: gettext;gettext_noop;_e;_ex;_x;__\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: views/settings.php:5
+msgid "Reply By Email Settings"
+msgstr ""
+
+#: views/settings.php:27
+msgid "Account No"
+msgstr ""
+
+#: views/settings.php:31
+msgid "Secret ID"
+msgstr ""
+
+#: views/settings.php:35
+msgid "Secret Key"
+msgstr ""
+
+#: views/settings.php:39
+msgid "Notify URL"
+msgstr ""
+
+#: views/settings.php:43
+msgid "Save Settings"
+msgstr ""
+
+#: hooks/class-mailer-hooks.php:53 hooks/class-mailer-hooks.php:65
+msgid "reply-push-sig"
+msgstr ""
+"<br><b>***** reply service *****</b><br><br><p><b>You can reply by the link "
+"provided, or reply directly to this email.</p><br><p><u>Please put your "
+"message directly ABOVE the quoted message you get when you click reply. "
+"Please ensure privacy of others.</u></p><br><p>Thank You.</b></"
+"p><br><p><small>{RP_CODE}</small></p>"
+
+#: hooks/class-settings-hooks.php:20
+msgid "subscribe2-required"
+msgstr ""
+"Reply By Email requires <a href=\"https://wordpress.org/plugins/subscribe2/"
+"\" target=\"_blank\">subscribe2</a> plugin to be enabled first."
+
+#: hooks/class-settings-hooks.php:37
+msgid "Reply By Email"
+msgstr ""
+
+#: controller/class-settings.php:20
+msgid "Account No missing"
+msgstr ""
+
+#: controller/class-settings.php:24
+msgid "Secret ID missing"
+msgstr ""
+
+#: controller/class-settings.php:28
+msgid "Secret Key missing"
+msgstr ""
+
+#~ msgid ""
+#~ "Reply By Email requires <a href=\"https://wordpress.org/plugins/"
+#~ "subscribe2/\" target=\"_blank\">subscribe2</a> plugin to be enabled first."
+#~ msgstr ""
+#~ "Reply By Email requires <a href=\"https://wordpress.org/plugins/"
+#~ "subscribe2/\" target=\"_blank\">subscribe2</a> plugin to be enabled first."
