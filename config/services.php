@@ -1,27 +1,33 @@
 <?php
-if ( ! ( defined( 'ABSPATH' ) && __CLASS__ == 'ImplicitHooksServices') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 $services = array(
+	'reply_push' => array(
+		'class'     => 'ReplyPush',
+		'path'      => 'library/reply-push/class.replypush.php'
+	),
 	'utility' => array(
+		'requires'  => array(
+			'reply_push'
+		),
 		'class'     => 'ReplyByEmailUtility',
 		'path'      => 'helper/class-utility.php',
 		'args'      => array(
-			'wp_rewrite' => '%%wp_rewrite',
-			'wp_query'   => '%%query_vars'
+			'wp_query'   => '%%wp_query.query'
 		)
 	),
 	'mailer' => array(
+		'requires'  => array(
+			'reply_push'
+		),
 		'class'     => 'ReplyByEmailMailer',
 		'path'      => 'helper/class-mailer.php',
 		'args'      => array(
 			'utility'    => '@@utility',
-			'rp_model'   => '@@reply_push_model',
+			'reply_push_model'   => '@@reply_push_model',
 			'the_post'   => '%%post',
+			'subscribe2' => '%%mysubscribe2'
 		)
-	),
-	'reply_push' => array(
-		'class'     => 'ReplyPush',
-		'path'      => 'library/reply-push/class.replypush.php'
 	),
 	'reply_push_model' => array(
 		'class'     => 'ReplyPushModel',
@@ -39,7 +45,8 @@ $services = array(
 	),
 	'settings_controller' => array(
 		'requires'  => array(
-			'controller'
+			'controller',
+			'reply_push'
 		),
 		'class'     => 'ReplyByEmailSettingsController',
 		'path'      => 'controller/class-settings.php',
@@ -58,7 +65,7 @@ $services = array(
 		'path'      => 'controller/class-notify.php',
 		'args'      => array(
 			'views_dir' => REPLY_BY_EMAIL_PATH . 'views',
-			'rp_model'  => '@@reply_push_model',
+			'reply_push_model'  => '@@reply_push_model',
 			'utility'   => '@@utility',
 			'post'      => '%%_POST'
 		)
