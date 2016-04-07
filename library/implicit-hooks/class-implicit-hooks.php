@@ -2,9 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // exists check for simple inclusion
-if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
+if ( ! class_exists( 'ImplicitHooks_v0_1_1b' ) ) {
 
-	class ImplicitHooksClassLoader_v0_1b {
+	class ImplicitHooksClassLoader_v0_1_1b {
 
 		protected $services;
 		protected $hook_dir;
@@ -19,7 +19,7 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 			$config_dir = $base_dir . '/' . $config_dir;
 			$hook_dir   = $base_dir . '/' . $hook_dir;
 
-			$this->services = new ImplicitHooksServices_v0_1b( $base_dir, $config_dir, $plugin_class_prefix ); // conditional on init
+			$this->services = new ImplicitHooksServices_v0_1_1b( $base_dir, $config_dir, $plugin_class_prefix ); // conditional on init
 			$this->hook_dir = $hook_dir;
 			$this->plugin_class_prefix = $plugin_class_prefix;
 			$this->hooks_prefix   = $hooks_files_prefix;
@@ -60,7 +60,7 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 		}
 	}
 
-	class ImplicitHooksServices_v0_1b {
+	class ImplicitHooksServices_v0_1_1b {
 
 		protected $services  = null;
 		protected $base_dir = null;
@@ -184,7 +184,7 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 		}
 	}
 
-	abstract class ImplicitHooksPluggable_v0_1b {
+	abstract class ImplicitHooksPluggable_v0_1_1b {
 
 		protected function event( $name, $type, $args ) {
 			$event_func = "{$type}_ref_array";
@@ -204,7 +204,7 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 		}
 	}
 
-	abstract class ImplicitHooks_v0_1b extends ImplicitHooksPluggable_v0_1b {
+	abstract class ImplicitHooks_v0_1_1b extends ImplicitHooksPluggable_v0_1_1b {
 
 		const VERSIONED = true;
 
@@ -227,6 +227,16 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 			$this->load_hooks();
 			$this->action('implicit_hooks_init');
 		}
+		
+		protected function variable_hooks( $name ) {
+			if ( isset( $this->variable_hooks ) ) {
+				$variable_hooks = $this->variable_hooks;
+				if ( isset( $variable_hooks[ $name ] ) ) {
+					return  $variable_hooks[ $name ];
+				}
+			} 
+			return false;
+		} 
 
 		protected function load_hooks() {
 			$class_methods = new ReflectionClass( $this );
@@ -240,9 +250,15 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 				);
 
 				if ( $is_hook ) {
-
+					if ( $match[2] == 'hook' ) {
+						$hook_name = $this->variable_hooks( $match[1] );
+						if ( !$hook_name ) {
+							continue;
+						}
+					} else {
+						$hook_name   = $match[2] == 'init' ? 'implicit_hooks_init' : $match[2];
+					}
 					$callback    = array( $this, $method_name );
-					$hook_name   = $match[2] == 'init' ? 'implicit_hooks_init' : $match[2];
 					$priority    = isset($match[4]) ? $match[4] : 20;
 					$hook_type   = $match[3];
 					if ( $hook_name == 'register' && $hook_type == 'activate') {
@@ -264,10 +280,10 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 			$hooks = &self::$cache[ "{$hook_type}_hooks" ];
 
 			if ( !isset( $hooks[ self::cache('curr_plugin_file')  ] ) ) {
-				$hooks[ self::cache('curr_plugin_file')  ] = array();
+				$hooks[ self::cache('curr_plugin_file') ] = array();
 			}
 
-			$hooks[ self::cache('curr_plugin_file')  ][] = $callback;
+			$hooks[ self::cache('curr_plugin_file') ][] = $callback;
 		}
 
 		protected function add_activation_hook( $callback ) {
@@ -313,10 +329,10 @@ if ( ! class_exists( 'ImplicitHooks_v0_1b' ) ) {
 
 			$plugin_loc = "{$base_dir}{$plugin_file}.php";
 
-			register_activation_hook( $plugin_loc, array('ImplicitHooks_v0_1b', 'activation') );
-			register_deactivation_hook( $plugin_loc, array('ImplicitHooks_v0_1b', 'deactivation') );
+			register_activation_hook( $plugin_loc, array('ImplicitHooks_v0_1_1b', 'activation') );
+			register_deactivation_hook( $plugin_loc, array('ImplicitHooks_v0_1_1b', 'deactivation') );
 
-			self::cache('file_loader', new ImplicitHooksClassLoader_v0_1b( $base_dir, $config_dir, $hook_dir, $plugin_class_prefix, $hooks_files_prefix, $hooks_files_suffix ) );
+			self::cache('file_loader', new ImplicitHooksClassLoader_v0_1_1b( $base_dir, $config_dir, $hook_dir, $plugin_class_prefix, $hooks_files_prefix, $hooks_files_suffix ) );
 			self::cache('file_loader')->load();
 		}
 

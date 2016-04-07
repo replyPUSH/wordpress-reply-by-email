@@ -60,3 +60,8 @@ We are eager to help, just ask
 Emails don't arrive instantly so bear in mind there may be some latency, beyond your or replyPUSH control.
 
 As we are starting out, direct troubleshooting opportunities will help up iron out any potential issues, and improve the plugin and service. 
+
+== Changelog ==
+
+= 0.2.2 =
+* Initial release
