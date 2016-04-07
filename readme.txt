@@ -3,7 +3,7 @@ Contributors: replypush
 Tags: comments, reply, email, replies, discussion, subscribe
 Requires at least: 4.4.2
 Tested up to: 4.4.2
-Stable Tag: 0.2.2
+Stable Tag: 0.2.3
 Header tagline: Comment and Post Reply via Email
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -63,5 +63,5 @@ As we are starting out, direct troubleshooting opportunities will help up iron o
 
 == Changelog ==
 
-= 0.2.2 =
+= 0.2.3 =
 * Initial release

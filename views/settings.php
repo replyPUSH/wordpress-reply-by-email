@@ -5,7 +5,7 @@ add_thickbox();
 <div class="wrap">
 	<h2><?php _e('Reply By Email Settings', 'reply-by-email'); ?></h2>
 	<?php
-	if ( !empty( $this->data('errors') ) ) {
+	if ( !empty( $this->data['errors'] ) ) {
 	?>
 	<div class="error reply-push-settings-error">
 	<?php
